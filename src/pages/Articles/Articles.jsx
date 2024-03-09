@@ -22,24 +22,25 @@ const Article = () => {
     }
   };
 
-  useEffect(() => {
-    getArticles();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   getArticles();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
-    <div className="frame">
-      {articles.map((article) => (
-        <Card
-          key={article.id}
-          img={article.imageUrl}
-          name={article.name}
-          price={article.price}
-          size={article.size}
-          articleId={article.id}
-        />
-      ))}
-    </div>
+    <h1>Hey</h1>
+    // <div className="frame">
+    //   {articles.map((article) => (
+    //     <Card
+    //       key={article.id}
+    //       img={article.imageUrl}
+    //       name={article.name}
+    //       price={article.price}
+    //       size={article.size}
+    //       articleId={article.id}
+    //     />
+    //   ))}
+    // </div>
   );
 };
 

@@ -38,20 +38,9 @@ const ArticleDetails = () => {
   useEffect(() => {
     getArticleById(ArticleID);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ArticleID]);
 
-  useEffect(() => {
-    const handleReload = () => {
-      getArticleById(ArticleID);
-    };
-
-    window.addEventListener("beforeunload", handleReload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleReload);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  
 
   return (
     <div className="articleFrame">

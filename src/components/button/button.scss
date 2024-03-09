@@ -1,0 +1,26 @@
+button {
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background-color: black;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--light);
+  text-wrap: nowrap;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: #c78c24;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #865500;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.416);
+  }
+}
+
+button .icon {
+  width: 1rem;
+}

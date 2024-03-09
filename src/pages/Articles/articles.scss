@@ -1,0 +1,25 @@
+.frame {
+  width: 95%;
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 23vw);
+  gap: 16px;
+}
+
+@media (max-width: 400px) {
+  .frame {
+    grid-template-columns: repeat(1, 90vw);
+  }
+}
+
+@media (min-width: 401px) and (max-width: 600px) {
+  .frame {
+    grid-template-columns: repeat(2, 46vw);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .frame {
+    grid-template-columns: repeat(3, 30vw);
+  }
+}

@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--black);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-family: "BrandFont";
+  color: var(--light);
+
+  & h1::first-letter {
+    color: var(--primary);
+  }
+}
+
+.logo {
+  margin: 10px 20px;
+  width: 40px;
+  height: 40px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

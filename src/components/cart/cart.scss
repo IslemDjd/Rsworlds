@@ -1,0 +1,26 @@
+.cart {
+  display: flex;
+  margin-right: 20px;
+
+  .cartIcon {
+    margin: 5px;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .cartItems {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "BrandFont";
+  }
+}

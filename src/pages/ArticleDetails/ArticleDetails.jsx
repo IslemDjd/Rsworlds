@@ -15,7 +15,7 @@ const ArticleDetails = () => {
   //   const pathParts = location.pathname.split("/");
   //   const targetPart = pathParts.slice(2).join("/");
 
-  const test = useParams();
+  const {ArticleID} = useParams();
 
   const getArticleById = async (articleId) => {
     try {
@@ -36,22 +36,22 @@ const ArticleDetails = () => {
   };
 
   useEffect(() => {
-    getArticleById(test.ArticleID);
+    getArticleById(ArticleID);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-   useEffect(() => {
-     const handleReload = () => {
-       getArticleById(test.ArticleID);
-     };
+  useEffect(() => {
+    const handleReload = () => {
+      getArticleById(ArticleID);
+    };
 
-     window.addEventListener("beforeunload", handleReload);
+    window.addEventListener("beforeunload", handleReload);
 
-     return () => {
-       window.removeEventListener("beforeunload", handleReload);
-     };
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
+    return () => {
+      window.removeEventListener("beforeunload", handleReload);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="articleFrame">

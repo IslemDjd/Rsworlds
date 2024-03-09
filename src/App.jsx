@@ -7,7 +7,6 @@ import Article from "./pages/Articles/Articles";
 import Error from "./pages/Error";
 import ArticleDetails from "./pages/ArticleDetails/ArticleDetails";
 
-
 function App() {
   // console.log(import.meta.env.VITE_API_KEY);
   // console.log(import.meta.env.VITE_MEASUREMENT_ID);

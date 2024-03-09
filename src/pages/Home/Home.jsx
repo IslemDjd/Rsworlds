@@ -8,8 +8,13 @@ const Home = () => {
     <>
       <h1>This Is Home Page</h1>
       {/* <a href="/articles"></a> */}
-       <Link style={{color:"#000"}} to="/articles">Artiles</Link>
-      <Button image={icon} width="200px" margin="0 auto" text="See Articles" />
+
+      <Button
+        image={icon}
+        width="200px"
+        margin="0 auto"
+        text={<Link to="/articles">See Articles</Link>}
+      />
       <div style={{ height: "400px" }}></div>
     </>
   );

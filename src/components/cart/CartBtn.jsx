@@ -9,7 +9,7 @@ const Cart = () => {
       <img
         className="cartIcon"
         onClick={() => {
-          navigate("/cart");
+          navigate("cart");
         }}
         src={cart}
         alt=""

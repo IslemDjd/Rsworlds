@@ -1,4 +1,4 @@
-import Card from "../../components/card/Card";
+// import Card from "../../components/card/Card";
 import "./articles.scss";
 // import { db } from "../../config/firebase";
 // import { useEffect, useState } from "react";

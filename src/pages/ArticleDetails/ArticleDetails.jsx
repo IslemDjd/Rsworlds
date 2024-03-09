@@ -35,6 +35,7 @@ const ArticleDetails = () => {
     }
   };
 
+  getArticleById(test.ArticleID);
   useEffect(() => {
     getArticleById(test.ArticleID);
     // eslint-disable-next-line react-hooks/exhaustive-deps

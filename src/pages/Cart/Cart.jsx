@@ -3,7 +3,6 @@ const Cart = () => {
     <div>
       <h1>This Is Cart Page</h1>
       <div style={{ height: "400px"}}></div>
-      <div style={{ height: "400px" }}></div>
     </div>
   );
 };

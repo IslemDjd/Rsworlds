@@ -18,7 +18,7 @@ const Card = (props) => {
             </div>
             <div className="price">
               <span>
-                Size:{props.size} - {props.price}DA
+                Size:{props.size} {props.price}DA
               </span>
             </div>
             <Button

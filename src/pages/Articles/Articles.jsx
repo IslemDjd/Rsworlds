@@ -3,6 +3,8 @@ import "./articles.scss";
 import { db } from "../../config/firebase";
 import { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
+import ArticleLoader from "../../loaders/ArticleLoader";
+
 
 const Article = () => {
   const [articles, setArticles] = useState([]);
@@ -27,6 +29,15 @@ const Article = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const filterAndSortSizes = (sizes) => {
+    const sizeOrder = ["S", "M", "L", "XL", "XXL"];
+    return sizeOrder.filter((size) => sizes[size] !== 0);
+  };
+
+  if (!articles || articles.length === 0) {
+    return <ArticleLoader />;
+  }
+
   return (
     <div className="frame">
       {articles.map((article) => (
@@ -35,7 +46,9 @@ const Article = () => {
           img={article.imageUrl}
           name={article.name}
           price={article.price}
-          size={article.size}
+          size={filterAndSortSizes(article.size).map((size) => (
+            <span key={size}>{size}-</span>
+          ))}
           articleId={article.id}
         />
       ))}

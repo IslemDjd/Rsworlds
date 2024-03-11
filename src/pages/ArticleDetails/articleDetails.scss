@@ -20,20 +20,35 @@
 .left {
   width: 60%;
   text-align: start;
+  margin-left: 20px;
 }
 
 .articleTitle {
   font-family: "mdBold";
+  margin: 1rem 0 2rem 0;
 }
 .articleSize {
-  display: block;
+  display: flex;
+  flex-direction: column;
   font-family: "afacad";
   font-size: 1.5rem;
+
+  .storeSizes {
+    display: flex;
+    width: 100%;
+    justify-content: start;
+  }
 }
 .articlePrice {
-  display: block;
-  font-family: "afacad";
-  font-size: 1.5rem;
+  h3 {
+    font-size: 1.5rem;
+    font-family: "mdBold";
+    display: inline;
+  }
+  span {
+    font-size: 1.5rem;
+    font-family: "mdSemi";
+  }
 }
 .articleQuantity {
   display: block;

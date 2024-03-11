@@ -14,9 +14,10 @@ button {
   border-radius: 0.5rem;
 
   &:hover {
-    background-color: #c78c24;
+    background-color: rgb(87, 87, 87);
     transition: all 0.3s ease-in-out;
-    border: 1px solid #865500;
+    color: var(--light);
+    border: 1px solid var(--black);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.416);
   }
 }

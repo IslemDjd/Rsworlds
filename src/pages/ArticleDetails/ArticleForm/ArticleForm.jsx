@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import SizeRadioBtn from "../SizeRadioBtn/SizeRadioBtn";
+// import SizeRadioBtn from "../SizeRadioBtn/SizeRadioBtn";
 import { useState } from "react";
 import Button from "../../../components/button/Button";
 import icon from "../../../assets/cart.svg";
@@ -12,19 +12,9 @@ import "./articleForm.scss";
 const ArticleForm = (props) => {
   const [selectedQt, setSelectedQt] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
-  const [add, setAdd] = useState([]);
+  const [add, setAdd] = useState({});
 
-  // Form Validation
-  //   const schema = yup.object().shape({
-  //     // size: yup.string().required("Please Select A Size"),
-  //     quantity: yup.string().required(),
-  //   });
-
-  //   const {
-  //     register,
-  //     handleSubmit,
-  //     formState: { errors },
-  //   } = useForm({ resolver: yupResolver(schema) });
+  // console.log(props);
 
   // Quantity State Increment and Decrement
   const increment = () => {
@@ -32,33 +22,60 @@ const ArticleForm = (props) => {
       setSelectedQt((prev) =>
         Math.min(props.article.size[selectedSize], prev + 1)
       );
-      //   console.log(selectedQt);
-      //   console.log(selectedSize);
       if (selectedQt == props.article.size[selectedSize]) {
         alert("There Is No More");
-        // console.log(props.article.size[selectedSize]);
       }
     }
+    setAdd({
+      id: props.article.id,
+      size: selectedSize,
+      quantity: selectedQt,
+    });
   };
 
   const decrement = () => {
     setSelectedQt((prev) => Math.max(1, prev - 1));
-    console.log(selectedQt);
-    console.log(selectedSize);
+    setAdd({
+      id: props.article.id,
+      size: selectedSize,
+      quantity: selectedQt,
+    });
   };
 
   // Mapping and Filtering the Sizes Object
   const sizesOrder = ["S", "M", "L", "XL", "XXL"];
   const sizeElements = sizesOrder
     .filter((size) => props.article.size[size] > 0)
-    .map((size) => (
-      <SizeRadioBtn
-        setSelectedSize={setSelectedSize}
-        setSelectedQt={setSelectedQt}
-        key={size}
-        sizeValue={size}
-        // {...register("size")}
-      />
+    .map((size, index) => (
+      <div className="radio-tile-group" key={index}>
+        <div className="input-container">
+          <input
+            id={size}
+            className="radio-button"
+            type="radio"
+            name="radio"
+            onClick={() => {
+              setSelectedSize(size)
+              setAdd({
+                id: props.article.id,
+                size: selectedSize,
+                quantity: selectedQt,
+              });
+            }}
+          />
+          <div className="radio-tile">
+            <label htmlFor={size} className="radio-tile-label">
+              {size}
+            </label>
+          </div>
+        </div>
+      </div>
+      // <SizeRadioBtn
+      //   setSelectedSize={setSelectedSize}
+      //   setSelectedQt={setSelectedQt}
+      //   key={size}
+      //   sizeValue={size}
+      // />
     ));
 
   const handleSubmit = (e) => {
@@ -66,7 +83,6 @@ const ArticleForm = (props) => {
   };
 
   const sendIt = () => {
-    setAdd( selectedQt, selectedSize);
     console.log(add);
   };
 
@@ -75,8 +91,6 @@ const ArticleForm = (props) => {
       <span className="articleSize">
         Available Sizes :<div className="storeSizes">{sizeElements}</div>
       </span>
-
-      {/* <p>{errors.size?.message}</p> */}
 
       <div className="quantity">
         <span className="quantityText">Select Quantity </span>
@@ -87,16 +101,15 @@ const ArticleForm = (props) => {
           type="number"
           className="quantityValue"
           readOnly
+          onChange={(e) => {
+            console.log(e.target.value);
+          }}
           value={selectedQt}
-          //   {...register("quantity")}
         />
-        {/* <span className="quantityValue">1</span> */}
         <button className="plus" onClick={increment}>
           +
         </button>
       </div>
-
-      {/* <p>{errors.quantity?.message}</p> */}
 
       <div className="totalPrice">
         <h3>Total Price : </h3>
@@ -116,3 +129,15 @@ const ArticleForm = (props) => {
 };
 
 export default ArticleForm;
+
+// Form Validation
+//   const schema = yup.object().shape({
+//     // size: yup.string().required("Please Select A Size"),
+//     quantity: yup.string().required(),
+//   });
+
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm({ resolver: yupResolver(schema) });

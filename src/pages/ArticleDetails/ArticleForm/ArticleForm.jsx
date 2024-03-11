@@ -1,45 +1,66 @@
 /* eslint-disable react/prop-types */
-// import SizeRadioBtn from "../SizeRadioBtn/SizeRadioBtn";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "../../../components/button/Button";
 import icon from "../../../assets/cart.svg";
 import "./articleForm.scss";
-
-// import { useForm } from "react-hook-form";
-// import * as yup from "yup";
-// import { yupResolver } from "@hookform/resolvers/yup";
+import PopUpWarning from "../../../components/popUp/PopUpWarning";
+import PopUpSuccess from "../../../components/popUp/PopUpSuccess";
 
 const ArticleForm = (props) => {
   const [selectedQt, setSelectedQt] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
-  const [add, setAdd] = useState({});
+  const [addToCart, setAddToCart] = useState({});
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
-  // console.log(props);
+  useEffect(() => {
+    handleAddToCart();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedQt, selectedSize]);
+
+  useEffect(() => {
+    if (error) {
+      const timeout = setTimeout(() => {
+        setError(null);
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+
+    if (success) {
+      const timeout = setTimeout(() => {
+        setSuccess(null);
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [error, success]);
 
   // Quantity State Increment and Decrement
   const increment = () => {
     if (selectedSize !== "") {
-      setSelectedQt((prev) =>
-        Math.min(props.article.size[selectedSize], prev + 1)
-      );
       if (selectedQt == props.article.size[selectedSize]) {
-        alert("There Is No More");
+        setError("You've Selected All Available Articles");
+      } else {
+        setSelectedQt((prev) =>
+          Math.min(props.article.size[selectedSize], prev + 1)
+        );
       }
+    } else {
+      setError("Please select a size");
     }
-    setAdd({
-      id: props.article.id,
-      size: selectedSize,
-      quantity: selectedQt,
-    });
   };
 
   const decrement = () => {
-    setSelectedQt((prev) => Math.max(1, prev - 1));
-    setAdd({
-      id: props.article.id,
-      size: selectedSize,
-      quantity: selectedQt,
-    });
+    if (selectedSize !== "") {
+      if (selectedQt == 1) {
+        setError("You Can't Select 0 Items");
+      } else {
+        setSelectedQt((prev) => Math.max(1, prev - 1));
+      }
+    } else {
+      setError("Please select a size");
+    }
   };
 
   // Mapping and Filtering the Sizes Object
@@ -55,12 +76,7 @@ const ArticleForm = (props) => {
             type="radio"
             name="radio"
             onClick={() => {
-              setSelectedSize(size)
-              setAdd({
-                id: props.article.id,
-                size: selectedSize,
-                quantity: selectedQt,
-              });
+              setSelectedSize(size);
             }}
           />
           <div className="radio-tile">
@@ -70,24 +86,29 @@ const ArticleForm = (props) => {
           </div>
         </div>
       </div>
-      // <SizeRadioBtn
-      //   setSelectedSize={setSelectedSize}
-      //   setSelectedQt={setSelectedQt}
-      //   key={size}
-      //   sizeValue={size}
-      // />
     ));
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleAddToCart = () => {
+    setAddToCart({
+      id: props.article.id,
+      size: selectedSize,
+      quantity: selectedQt,
+    });
   };
 
   const sendIt = () => {
-    console.log(add);
+    if (selectedSize !== "") {
+      handleAddToCart();
+      console.log("Add to cart clicked");
+      setSuccess("Article Added To Cart");
+      console.log(addToCart);
+    } else {
+      setError("Please Select a Size First ");
+    }
   };
 
   return (
-    <form action="" onSubmit={handleSubmit} className="articleForm">
+    <div className="articleForm">
       <span className="articleSize">
         Available Sizes :<div className="storeSizes">{sizeElements}</div>
       </span>
@@ -101,9 +122,6 @@ const ArticleForm = (props) => {
           type="number"
           className="quantityValue"
           readOnly
-          onChange={(e) => {
-            console.log(e.target.value);
-          }}
           value={selectedQt}
         />
         <button className="plus" onClick={increment}>
@@ -122,22 +140,15 @@ const ArticleForm = (props) => {
         height="2.5rem"
         margin="3rem auto"
         text="Add to cart"
+        onClick={sendIt}
       />
-      <button onClick={sendIt}>Submit</button>
-    </form>
+
+      {error && <PopUpWarning errorText={error} setError={setError} />}
+      {success && (
+        <PopUpSuccess successText={success} setSuccess={setSuccess} />
+      )}
+    </div>
   );
 };
 
 export default ArticleForm;
-
-// Form Validation
-//   const schema = yup.object().shape({
-//     // size: yup.string().required("Please Select A Size"),
-//     quantity: yup.string().required(),
-//   });
-
-//   const {
-//     register,
-//     handleSubmit,
-//     formState: { errors },
-//   } = useForm({ resolver: yupResolver(schema) });

@@ -6,16 +6,25 @@ import "./articleForm.scss";
 import PopUpWarning from "../../../components/popUp/PopUpWarning";
 import PopUpSuccess from "../../../components/popUp/PopUpSuccess";
 
+import { useSelector, useDispatch } from "react-redux";
+import { addArticle } from "../../../features/CartArticle";
+
 const ArticleForm = (props) => {
+  const cartArticle = useSelector((state) => state.cartArticle.value);
+  const dispatch = useDispatch();
+
   const [selectedQt, setSelectedQt] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
   const [addToCart, setAddToCart] = useState({});
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  console.log(cartArticle.bucket);
+
   useEffect(() => {
     handleAddToCart();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // handleAddArticle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedQt, selectedSize]);
 
   useEffect(() => {
@@ -75,6 +84,9 @@ const ArticleForm = (props) => {
             className="radio-button"
             type="radio"
             name="radio"
+            onChange={() => {
+              setSelectedQt(1);
+            }}
             onClick={() => {
               setSelectedSize(size);
             }}
@@ -96,11 +108,20 @@ const ArticleForm = (props) => {
     });
   };
 
+  const handleAddArticle = () => {
+    if (addToCart !== undefined) {
+      dispatch(addArticle(addToCart));
+    }
+  };
+
   const sendIt = () => {
     if (selectedSize !== "") {
       handleAddToCart();
       console.log("Add to cart clicked");
       setSuccess("Article Added To Cart");
+
+      handleAddArticle();
+      localStorage.setItem("cartArticle", JSON.stringify(cartArticle.bucket));
       console.log(addToCart);
     } else {
       setError("Please Select a Size First ");
@@ -147,8 +168,24 @@ const ArticleForm = (props) => {
       {success && (
         <PopUpSuccess successText={success} setSuccess={setSuccess} />
       )}
+
+      <div>
+        {/* <h1>id : {cartArticle?.bucket[0].id}</h1> */}
+        {/* <h1>size : {cartArticle?.bucket[0].size}</h1> */}
+        {/* <h1>bucket : {cartArticle?.bucket[0]}</h1> */}
+      </div>
     </div>
   );
 };
 
 export default ArticleForm;
+
+//  const handleAddArticle = () => {
+//    const existingItemIndex = cartArticle.bucket.findIndex(
+//      (item) => item.id === addToCart.id && item.size === addToCart.size
+//    );
+
+//    if (existingItemIndex === -1) {
+//      dispatch(addArticle(addToCart));
+//    }
+//  };

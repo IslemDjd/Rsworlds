@@ -17,6 +17,10 @@ header {
   & h1::first-letter {
     color: var(--primary);
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .logo {
@@ -24,7 +28,5 @@ header {
   width: 40px;
   height: 40px;
 
-  &:hover {
-    cursor: pointer;
-  }
+  
 }

@@ -7,15 +7,13 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <header>
-      <div className="brand">
-        <img
-          className="logo"
-          onClick={() => {
-            navigate("/");
-          }}
-          src={logo}
-          alt="Logo"
-        />
+      <div
+        className="brand"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <img className="logo" src={logo} alt="Logo" />
         <h1>RsWorlds</h1>
       </div>
       <nav>

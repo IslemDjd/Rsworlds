@@ -5,27 +5,22 @@ import icon from "../../../assets/cart.svg";
 import "./articleForm.scss";
 import PopUpWarning from "../../../components/popUp/PopUpWarning";
 import PopUpSuccess from "../../../components/popUp/PopUpSuccess";
-
 import { useSelector, useDispatch } from "react-redux";
-import { addArticle } from "../../../features/CartArticle";
+import {
+  addArticle,
+  removeArticle,
+  removeAllArticles,
+} from "../../../features/CartArticle";
+import addToCart from "../../../utils/addToCart";
+import { decrement, increment } from "./articleForm.helpers";
 
 const ArticleForm = (props) => {
   const cartArticle = useSelector((state) => state.cartArticle.value);
   const dispatch = useDispatch();
-
   const [selectedQt, setSelectedQt] = useState(1);
   const [selectedSize, setSelectedSize] = useState("");
-  const [addToCart, setAddToCart] = useState({});
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-
-  console.log(cartArticle.bucket);
-
-  useEffect(() => {
-    handleAddToCart();
-    // handleAddArticle();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedQt, selectedSize]);
 
   useEffect(() => {
     if (error) {
@@ -43,34 +38,8 @@ const ArticleForm = (props) => {
 
       return () => clearTimeout(timeout);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, success]);
-
-  // Quantity State Increment and Decrement
-  const increment = () => {
-    if (selectedSize !== "") {
-      if (selectedQt == props.article.size[selectedSize]) {
-        setError("You've Selected All Available Articles");
-      } else {
-        setSelectedQt((prev) =>
-          Math.min(props.article.size[selectedSize], prev + 1)
-        );
-      }
-    } else {
-      setError("Please select a size");
-    }
-  };
-
-  const decrement = () => {
-    if (selectedSize !== "") {
-      if (selectedQt == 1) {
-        setError("You Can't Select 0 Items");
-      } else {
-        setSelectedQt((prev) => Math.max(1, prev - 1));
-      }
-    } else {
-      setError("Please select a size");
-    }
-  };
 
   // Mapping and Filtering the Sizes Object
   const sizesOrder = ["S", "M", "L", "XL", "XXL"];
@@ -100,34 +69,6 @@ const ArticleForm = (props) => {
       </div>
     ));
 
-  const handleAddToCart = () => {
-    setAddToCart({
-      id: props.article.id,
-      size: selectedSize,
-      quantity: selectedQt,
-    });
-  };
-
-  const handleAddArticle = () => {
-    if (addToCart !== undefined) {
-      dispatch(addArticle(addToCart));
-    }
-  };
-
-  const sendIt = () => {
-    if (selectedSize !== "") {
-      handleAddToCart();
-      console.log("Add to cart clicked");
-      setSuccess("Article Added To Cart");
-
-      handleAddArticle();
-      localStorage.setItem("cartArticle", JSON.stringify(cartArticle.bucket));
-      console.log(addToCart);
-    } else {
-      setError("Please Select a Size First ");
-    }
-  };
-
   return (
     <div className="articleForm">
       <span className="articleSize">
@@ -136,7 +77,12 @@ const ArticleForm = (props) => {
 
       <div className="quantity">
         <span className="quantityText">Select Quantity </span>
-        <button className="minus" onClick={decrement}>
+        <button
+          className="minus"
+          onClick={() => {
+            decrement(selectedQt, setSelectedQt, selectedSize, setError);
+          }}
+        >
           -
         </button>
         <input
@@ -145,7 +91,18 @@ const ArticleForm = (props) => {
           readOnly
           value={selectedQt}
         />
-        <button className="plus" onClick={increment}>
+        <button
+          className="plus"
+          onClick={() => {
+            increment(
+              selectedQt,
+              setSelectedQt,
+              selectedSize,
+              setError,
+              props.article
+            );
+          }}
+        >
           +
         </button>
       </div>
@@ -161,7 +118,17 @@ const ArticleForm = (props) => {
         height="2.5rem"
         margin="3rem auto"
         text="Add to cart"
-        onClick={sendIt}
+        onClick={addToCart(
+          cartArticle,
+          selectedSize,
+          selectedQt,
+          props.article,
+          addArticle,
+          removeArticle,
+          setSuccess,
+          setError,
+          dispatch
+        )}
       />
 
       {error && <PopUpWarning errorText={error} setError={setError} />}
@@ -169,23 +136,16 @@ const ArticleForm = (props) => {
         <PopUpSuccess successText={success} setSuccess={setSuccess} />
       )}
 
-      <div>
-        {/* <h1>id : {cartArticle?.bucket[0].id}</h1> */}
-        {/* <h1>size : {cartArticle?.bucket[0].size}</h1> */}
-        {/* <h1>bucket : {cartArticle?.bucket[0]}</h1> */}
-      </div>
+      <button
+        onClick={() => {
+          dispatch(removeAllArticles());
+          setSuccess("All Articles Removed From Your Cart")
+        }}
+      >
+        Reset Cart
+      </button>
     </div>
   );
 };
 
 export default ArticleForm;
-
-//  const handleAddArticle = () => {
-//    const existingItemIndex = cartArticle.bucket.findIndex(
-//      (item) => item.id === addToCart.id && item.size === addToCart.size
-//    );
-
-//    if (existingItemIndex === -1) {
-//      dispatch(addArticle(addToCart));
-//    }
-//  };

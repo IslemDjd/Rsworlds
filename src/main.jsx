@@ -12,8 +12,6 @@ const store = configureStore({
   },
 });
 
-localStorage.setItem("cartArticle", JSON.stringify([]));
-console.log("heyy");
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

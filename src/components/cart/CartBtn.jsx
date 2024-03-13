@@ -1,5 +1,5 @@
 import cart from "../../assets/cart.svg";
-import "./cart.scss";
+import "./cartBtn.scss";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 

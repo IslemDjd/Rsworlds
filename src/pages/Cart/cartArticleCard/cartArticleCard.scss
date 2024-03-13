@@ -1,5 +1,72 @@
-.cartArticleCard{
+.cartArticleCard {
+  position: relative;
+  width: 50%;
+  margin: 2rem auto;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+
+  .left {
+    // width: 20%;
+    max-height: 40vh;
+    max-width: 10vw;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      //   justify-self: start;
+    }
+  }
+
+  .right {
+    padding: 1rem;
+    width: 80%;
+    text-align: left;
+
+    span {
+      display: block;
+    }
+  }
+
+  .removeIcon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .cartArticleCard {
     width: 90%;
-    margin: 2rem auto;
-    border: 1px solid black;
+    .left {
+      max-width: 30vw;
+      max-height: 30vh;
+      margin: 0;
+    }
+  }
+}
+
+@media (min-width: 401px) and (max-width: 600px) {
+  .cartArticleCard {
+    // background-color: red;
+    width: 90%;
+    .left {
+      margin: 0;
+      max-width: 25vw;
+      max-height: 40vh;
+    }
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .cartArticleCard {
+    width: 90%;
+    .left {
+      margin: 0;
+      max-width: 20vw;
+      max-height: 40vh;
+    }
+  }
 }

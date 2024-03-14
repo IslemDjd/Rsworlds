@@ -1,0 +1,51 @@
+.totalArticlesPrice {
+  font-family: "mdBold";
+  width: 50%;
+  margin: 1rem auto;
+  box-shadow: 0 0 5px rgba(117, 117, 117, 0.6);
+}
+
+.removeAll {
+  max-width: 100%;
+  margin: 2rem auto;
+}
+
+.cartHeader {
+  font-family: "mdBold";
+  width: 50%;
+  margin: 4rem auto 2rem auto;
+  box-shadow: 0 0 5px rgba(117, 117, 117, 0.6);
+}
+
+@media (max-width: 900px) {
+  .cartHeader {
+    width: 90%;
+  }
+
+  .totalArticlesPrice {
+    width: 90%;
+  }
+}
+
+// @media (min-width: 401px) and (max-width: 600px) {
+//   .cartArticleCard {
+//     // background-color: red;
+//     width: 90%;
+//     .left {
+//       margin: 0;
+//       max-width: 25vw;
+//       max-height: 40vh;
+//     }
+//   }
+// }
+
+// @media (min-width: 601px) and (max-width: 900px) {
+//   .cartArticleCard {
+//     width: 90%;
+//     .left {
+//       margin: 0;
+//       max-width: 20vw;
+//       max-height: 40vh;
+//     }
+//   }
+// }

@@ -1,0 +1,13 @@
+.isEmpty {
+  width: 90%;
+  min-height: 40vh;
+  box-shadow: 0 0 5px rgba(117, 117, 117, 0.6);
+  margin: 5rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2{
+    font-family: "mdBold";
+  }
+}

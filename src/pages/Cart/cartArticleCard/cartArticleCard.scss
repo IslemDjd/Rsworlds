@@ -2,38 +2,47 @@
   position: relative;
   width: 50%;
   margin: 2rem auto;
-  border: 1px solid black;
+  // border: 1px solid black;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 0 5px rgba(117, 117, 117, 0.6);
 
   .left {
-    // width: 20%;
     max-height: 40vh;
     max-width: 10vw;
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      //   justify-self: start;
     }
   }
 
   .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 1rem;
     width: 80%;
     text-align: left;
 
     span {
-      display: block;
+      font-family: "afacad";
+      text-wrap: nowrap;
+      font-size: 1.1rem;
+
+      span{
+        font-family: "mdSemi";
+      }
     }
   }
 
   .removeIcon {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.5rem;
+    right: 0.5rem;
     width: 1.5rem;
     height: 1.5rem;
+    fill: var(--primary);
   }
 }
 

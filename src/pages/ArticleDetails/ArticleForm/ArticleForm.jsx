@@ -6,11 +6,7 @@ import "./articleForm.scss";
 import PopUpWarning from "../../../components/popUp/PopUpWarning";
 import PopUpSuccess from "../../../components/popUp/PopUpSuccess";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addArticle,
-  removeArticle,
-  removeAllArticles,
-} from "../../../features/CartArticle";
+import { addArticle, removeArticle } from "../../../features/CartArticle";
 import addToCart from "../../../utils/addToCart";
 import { decrement, increment } from "./articleForm.helpers";
 
@@ -135,15 +131,6 @@ const ArticleForm = (props) => {
       {success && (
         <PopUpSuccess successText={success} setSuccess={setSuccess} />
       )}
-
-      <button
-        onClick={() => {
-          dispatch(removeAllArticles());
-          setSuccess("All Articles Removed From Your Cart")
-        }}
-      >
-        Reset Cart
-      </button>
     </div>
   );
 };

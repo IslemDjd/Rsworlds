@@ -1,16 +1,17 @@
 import "./cart.scss";
-import CartArticleCard from "./cartArticleCard/CartArticleCard";
-import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import getCartArticleById from "../../utils/getCartArticleById";
-import { useDispatch } from "react-redux";
-import { removeArticle } from "../../features/CartArticle";
+import { useSelector, useDispatch } from "react-redux";
+import CartArticleCard from "./cartArticleCard/CartArticleCard";
 import ArticleLoader from "../../loaders/ArticleLoader";
 import EmptyCart from "./cartArticleCard/EmptyCart";
 import PopUpWarning from "../../components/popUp/PopUpWarning";
 import PopUpSuccess from "../../components/popUp/PopUpSuccess";
-import { removeAllArticles } from "../../features/CartArticle";
-import { FaTimes } from "react-icons/fa";
+import getCartArticleById from "../../utils/getCartArticleById";
+import { removeArticle } from "../../features/CartArticle";
+// import { removeAllArticles } from "../../features/CartArticle";
+// import { FaTimes } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   const [myArticles, setMyArticles] = useState([]);
@@ -20,6 +21,7 @@ const Cart = () => {
   const [success, setSuccess] = useState(null);
   const cartArticle = useSelector((state) => state.cartArticle.value.bucket);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const removeItem = (id, size, quantity, price) => {
     dispatch(removeArticle({ id, size, quantity }));
@@ -68,20 +70,18 @@ const Cart = () => {
           setError={setError}
         />
       ))}
-      <h1 className="totalArticlesPrice">Total Price : {totalPrice} DA</h1>
-      <button
-        className="removeAll"
-        onClick={() => {
-          dispatch(removeAllArticles());
-          setSuccess("All Articles Removed From Your Cart");
-          setTimeout(() => {
-            setSuccess(null);
-          }, 3000);
-        }}
-      >
-        <FaTimes/>
-        Clear The Cart
-      </button>
+      <div className="bottom">
+        <h1 className="totalArticlesPrice">Total Price : {totalPrice} DA</h1>
+        <button
+          className="ConfirmBuy"
+          onClick={() => {
+            navigate("/checkout");
+          }}
+        >
+          <FaCheck />
+          Confirmer
+        </button>
+      </div>
 
       {error && <PopUpWarning errorText={error} setError={setError} />}
 
@@ -91,3 +91,19 @@ const Cart = () => {
 };
 
 export default Cart;
+
+{
+  /* <button
+        className="removeAll"
+        onClick={() => {
+          dispatch(removeAllArticles());
+          setSuccess("All Articles Removed From Your Cart");
+          setTimeout(() => {
+            setSuccess(null);
+          }, 3000);
+        }}
+      >
+        <FaTimes />
+        Clear The Cart
+      </button> */
+}

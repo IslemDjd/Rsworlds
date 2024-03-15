@@ -10,16 +10,16 @@ const CartArticleCard = (props) => {
       </div>
       <div className="right">
         <span>
-          <span>Name : </span>
-          {props.article.name}{" "}
-        </span>
-        <span>
           <span>Size : </span>
           {props.article.size}{" "}
         </span>
         <span>
           <span>Quantity : </span>
           {props.article.quantity}{" "}
+        </span>
+        <span>
+          <span>Name : </span>
+          {props.article.name}{" "}
         </span>
         <span>
           <span>Price : </span>

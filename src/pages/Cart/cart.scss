@@ -1,8 +1,10 @@
 .totalArticlesPrice {
   font-family: "mdBold";
-  width: 50%;
-  margin: 1rem auto;
-  box-shadow: 0 0 5px rgba(117, 117, 117, 0.6);
+  width: 100%;
+  margin: 0.5rem auto;
+  font-size: 1.4rem;
+  border-radius: 5px;
+  box-shadow: 0 0 3px rgba(117, 117, 117, 0.6);
 }
 
 .removeAll {
@@ -10,11 +12,25 @@
   margin: 2rem auto;
 }
 
+.bottom{
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  button{
+    width: 50%;
+    align-self: center;
+  }
+}
+
+
 .cartHeader {
   font-family: "mdBold";
   width: 50%;
   margin: 4rem auto 2rem auto;
-  box-shadow: 0 0 5px rgba(117, 117, 117, 0.6);
+  border-radius: 5px;
+  box-shadow: 0 0 3px rgba(117, 117, 117, 0.6);
 }
 
 @media (max-width: 900px) {
@@ -22,9 +38,13 @@
     width: 90%;
   }
 
-  .totalArticlesPrice {
+  .bottom{
     width: 90%;
+    button{
+      width: 100%;
+    }
   }
+
 }
 
 // @media (min-width: 401px) and (max-width: 600px) {

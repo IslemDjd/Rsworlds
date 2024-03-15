@@ -6,6 +6,7 @@ import Footer from "./components/footer/Footer";
 import Article from "./pages/Articles/Articles";
 import Error from "./pages/Error";
 import ArticleDetails from "./pages/ArticleDetails/ArticleDetails";
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   // console.log(import.meta.env.VITE_API_KEY);
@@ -19,6 +20,7 @@ function App() {
           <Route path="articles" element={<Article />} />
           <Route path="articles/:ArticleID" element={<ArticleDetails />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="checkout" element={<Checkout/>}/>
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

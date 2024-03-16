@@ -24,6 +24,7 @@
 }
 
 .articleTitle {
+  font-size: 1.6rem;
   font-family: "mdBold";
   margin: 1rem 0 2rem 0;
 }
@@ -43,9 +44,11 @@
   h3 {
     font-size: 1.5rem;
     font-family: "mdBold";
+    color: rgb(18, 93, 118);
     display: inline;
   }
   span {
+    color: rgb(18, 93, 118);
     font-size: 1.5rem;
     font-family: "mdSemi";
   }
@@ -59,14 +62,14 @@
 @media (max-width: 900px) {
   .articleFrame {
     flex-direction: column;
-  }
-  .right {
-    width: 90%;
-    margin: 0 auto;
-  }
+    .right {
+      width: 90%;
+      margin: 0 auto;
+    }
 
-  .left {
-    width: 90%;
-    margin: 0 auto;
+    .left {
+      width: 90%;
+      margin: 0 auto;
+    }
   }
 }

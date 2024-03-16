@@ -18,7 +18,13 @@ const Card = (props) => {
             </div>
             <div className="price">
               <span>
-                Size:{props.size} {props.price}DA
+                <b style={{ fontFamily: "kanit" }}>Size : </b>
+                {props.size}
+              </span>
+              <br />
+              <span>
+                <b style={{ fontFamily: "kanit" }}>Price : </b>
+                {props.price}DA
               </span>
             </div>
             <Button

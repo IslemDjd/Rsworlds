@@ -30,7 +30,9 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  margin-right: 2rem;
+  text-wrap: nowrap;
   font-family: "afacad";
 }
 
@@ -55,8 +57,11 @@
     font-size: 1.5rem;
     display: inline;
     font-family: "mdBold";
+    color: rgb(18, 93, 118);
+    
   }
   span {
+    color: rgb(18, 93, 118);
     font-size: 1.5rem;
     font-family: "mdSemi";
   }

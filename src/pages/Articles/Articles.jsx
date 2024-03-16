@@ -47,7 +47,7 @@ const Article = () => {
           name={article.name}
           price={article.price}
           size={filterAndSortSizes(article.size).map((size) => (
-            <span key={size}>{size}-</span>
+            <span key={size}>{size} </span>
           ))}
           articleId={article.id}
         />

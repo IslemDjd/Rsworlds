@@ -75,6 +75,7 @@ const Cart = () => {
         <button
           className="ConfirmBuy"
           onClick={() => {
+            localStorage.setItem("selectedArticles", JSON.stringify(myArticles));
             navigate("/checkout");
           }}
         >

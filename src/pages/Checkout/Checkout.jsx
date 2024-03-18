@@ -3,16 +3,21 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import wilayas from "./wilayas.json";
+import { db } from "../../config/firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { removeAllArticles } from "../../features/CartArticle";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
     firstName: yup.string().required("Please Enter Your First Name"),
     lastName: yup.string().required("Please Enter Your Last Name"),
     phoneNumber: yup
       .string()
-      // .typeError("Please Enter a Valid Phone Number")
-      // .positive("Please Enter a Valid Phone Number")
-      // .integer("Please Enter a Valid Phone Number")
       .required("Please Enter Your Phone Number")
       .matches(/^\d{10}$/, "Phone Number must be 10 digits"),
     address: yup.string().required("Please Enter Your Home Address"),
@@ -25,15 +30,18 @@ const Checkout = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
+  const commandsRef = collection(db, "Commands");
+  const onSubmit = async (data) => {
     // console.log(data);
     // console.log(JSON.parse(localStorage.getItem("selectedArticles")));
     const command = {
       user: data,
       articles: JSON.parse(localStorage.getItem("selectedArticles")),
     };
-    console.log(command);
-
+    // console.log(typeof JSON.parse(localStorage.getItem("selectedArticles")));
+    await addDoc(commandsRef, command);
+    dispatch(removeAllArticles());
+    navigate("/");
   };
   return (
     <div>

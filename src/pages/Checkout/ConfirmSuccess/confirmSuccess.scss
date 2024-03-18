@@ -1,0 +1,32 @@
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+.modalFrame {
+  font-family: "mdBold";
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -80%);
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+
+  h1 {
+    font-size: 1.7rem;
+    color: green;
+    width: 90%;
+    margin: 3rem auto;
+  }
+
+  h3 {
+    width: 90%;
+    margin: 0 auto 2rem auto;
+  }
+}

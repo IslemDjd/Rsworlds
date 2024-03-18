@@ -5,11 +5,8 @@ import CartArticleCard from "./cartArticleCard/CartArticleCard";
 import ArticleLoader from "../../loaders/ArticleLoader";
 import EmptyCart from "./cartArticleCard/EmptyCart";
 import PopUpWarning from "../../components/popUp/PopUpWarning";
-import PopUpSuccess from "../../components/popUp/PopUpSuccess";
 import getCartArticleById from "../../utils/getCartArticleById";
 import { removeArticle } from "../../features/CartArticle";
-// import { removeAllArticles } from "../../features/CartArticle";
-// import { FaTimes } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
@@ -18,7 +15,6 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
   const cartArticle = useSelector((state) => state.cartArticle.value.bucket);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,9 +47,6 @@ const Cart = () => {
   if (myArticles.length === 0) {
     return (
       <div>
-        {success && (
-          <PopUpSuccess successText={success} setSuccess={setSuccess} />
-        )}
         <EmptyCart />
       </div>
     );
@@ -75,7 +68,10 @@ const Cart = () => {
         <button
           className="ConfirmBuy"
           onClick={() => {
-            localStorage.setItem("selectedArticles", JSON.stringify(myArticles));
+            localStorage.setItem(
+              "selectedArticles",
+              JSON.stringify(myArticles)
+            );
             navigate("/checkout");
           }}
         >
@@ -92,19 +88,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-{
-  /* <button
-        className="removeAll"
-        onClick={() => {
-          dispatch(removeAllArticles());
-          setSuccess("All Articles Removed From Your Cart");
-          setTimeout(() => {
-            setSuccess(null);
-          }, 3000);
-        }}
-      >
-        <FaTimes />
-        Clear The Cart
-      </button> */
-}

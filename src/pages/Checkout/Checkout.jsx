@@ -5,13 +5,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import wilayas from "./wilayas.json";
 import { db } from "../../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
-import { removeAllArticles } from "../../features/CartArticle";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import ConfirmSucess from "./ConfirmSuccess/ConfirmSucess";
+import { useEffect, useState } from "react";
 
 const Checkout = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cartArticle = useSelector((state) => state.cartArticle.value.bucket);
+
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const schema = yup.object().shape({
     firstName: yup.string().required("Please Enter Your First Name"),
@@ -24,6 +27,18 @@ const Checkout = () => {
     wilaya: yup.string().required("Please Select a Wilaya"),
   });
 
+  useEffect(() => {
+    const selectedArticles = localStorage.getItem("selectedArticles");
+    if (
+      !selectedArticles ||
+      JSON.parse(selectedArticles).length === 0 ||
+      cartArticle.length === 0
+    ) {
+      navigate("/articles");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cartArticle]);
+
   const {
     register,
     handleSubmit,
@@ -32,19 +47,15 @@ const Checkout = () => {
 
   const commandsRef = collection(db, "Commands");
   const onSubmit = async (data) => {
-    // console.log(data);
-    // console.log(JSON.parse(localStorage.getItem("selectedArticles")));
     const command = {
       user: data,
       articles: JSON.parse(localStorage.getItem("selectedArticles")),
     };
-    // console.log(typeof JSON.parse(localStorage.getItem("selectedArticles")));
     await addDoc(commandsRef, command);
-    dispatch(removeAllArticles());
-    navigate("/");
+    setOrderConfirmed(true);
   };
   return (
-    <div>
+    <div style={{ position: "relative", padding: "3rem 0" }}>
       <form action="" onSubmit={handleSubmit(onSubmit)} className="clientForm">
         <h1>Client Information</h1>
         <p className="input-container">
@@ -111,14 +122,12 @@ const Checkout = () => {
               </option>
             ))}
           </select>
-          {/* <label className="input-label" htmlFor="address">
-            Wilaya
-          </label> */}
         </p>
         <span className="errorSpan">{errors.wilaya?.message}</span>
 
         <button className="confirm"> Confirmer </button>
       </form>
+      {orderConfirmed && <ConfirmSucess />}
     </div>
   );
 };

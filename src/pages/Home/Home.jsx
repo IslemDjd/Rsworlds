@@ -6,17 +6,16 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
-      <h1>This Is Home Page</h1>
       <Link to="/articles">
         <Button
           image={icon}
           width="200px"
-          margin="0 auto"
+          margin="15rem auto"
           text="See Articles"
         />
       </Link>
 
-      <div style={{ height: "400px" }}></div>
+      <div style={{ height: "100px" }}></div>
     </>
   );
 };

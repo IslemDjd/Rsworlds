@@ -10,7 +10,7 @@ const Navbar = () => {
       <div
         className="brand"
         onClick={() => {
-          navigate("/");
+          navigate("/articles");
         }}
       >
         <img className="logo" src={logo} alt="Logo" />

@@ -11,7 +11,7 @@ const Footer = () => {
         <img
           className="logo"
           onClick={() => {
-            navigate("/");
+            navigate("/articles");
           }}
           src={logo}
           alt="Logo"
@@ -35,7 +35,7 @@ const Footer = () => {
       <div className="contact">
         <h4>Contact Us </h4>
         <FaPhone />
-        <h4>0555782854</h4>
+        <h4>1234567890</h4>
       </div>
     </footer>
   );

@@ -79,6 +79,10 @@ const Cart = () => {
           Confirmer
         </button>
       </div>
+      <div className="reminder">
+        <p>Delivery Price Is Not Included</p>
+        <p>Prix De Livraison N&apos;est Pas Inclus</p>
+      </div>
 
       {error && <PopUpWarning errorText={error} setError={setError} />}
 

@@ -5,16 +5,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import wilayas from "./wilayas.json";
 import { db } from "../../config/firebase";
 import { addDoc, collection } from "firebase/firestore";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeAllArticles } from "../../features/CartArticle";
 import { useNavigate } from "react-router";
-import ConfirmSucess from "./ConfirmSuccess/ConfirmSucess";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const Checkout = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartArticle = useSelector((state) => state.cartArticle.value.bucket);
-
-  const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const schema = yup.object().shape({
     firstName: yup.string().required("Please Enter Your First Name"),
@@ -37,7 +36,7 @@ const Checkout = () => {
       navigate("/articles");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartArticle]);
+  }, []);
 
   const {
     register,
@@ -46,13 +45,17 @@ const Checkout = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const commandsRef = collection(db, "Commands");
+
   const onSubmit = async (data) => {
     const command = {
       user: data,
       articles: JSON.parse(localStorage.getItem("selectedArticles")),
     };
     await addDoc(commandsRef, command);
-    setOrderConfirmed(true);
+    navigate("/confirmationSucces");
+    window.scroll(0, 0);
+    localStorage.removeItem("selectedArticles");
+    dispatch(removeAllArticles());
   };
   return (
     <div style={{ position: "relative", padding: "3rem 0" }}>
@@ -127,7 +130,7 @@ const Checkout = () => {
 
         <button className="confirm"> Confirmer </button>
       </form>
-      {orderConfirmed && <ConfirmSucess />}
+      {/* {orderConfirmed && <ConfirmSucess />} */}
     </div>
   );
 };

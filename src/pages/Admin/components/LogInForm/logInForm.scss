@@ -1,0 +1,65 @@
+.adminCard {
+  width: 60%;
+  margin: 5rem auto;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 3px rgba(117, 117, 117, 0.6);
+
+  h1 {
+    width: 90%;
+    margin: 2rem auto;
+    color: var(--primary);
+    font-family: "mdBold";
+  }
+
+  .adminForm {
+    width: 90%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    label {
+      font-family: "mdSemi";
+      text-align: start;
+    }
+
+    input {
+      font-family: "mdSemi";
+      padding: 0.5em 0.75em;
+      margin: 0.5rem 0 ;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 0.3rem;
+      letter-spacing: 0.1ch;
+      caret-color: black;
+      color: black;
+    }
+
+    input:-webkit-autofill {
+      -webkit-text-fill-color: black !important;
+      background-color: white !important;
+      border: 1px solid black;
+      box-shadow: 0 0 0 50px white inset !important;
+      caret-color: black;
+    }
+
+    button{
+        margin-bottom: 2rem;
+    }
+
+    p{
+        color: red;
+        font-family: "mdSemi";
+        margin: 0 auto 2rem auto;
+    }
+  }
+}
+
+
+@media (max-width: 600px) {
+    .adminCard{
+        width: 90%;
+    }
+}
+

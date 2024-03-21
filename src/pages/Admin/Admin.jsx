@@ -1,41 +1,51 @@
 import "./admin.scss";
 import { auth } from "../../config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changePage } from "../../features/AdminPage";
+import ArticleLoader from "../../loaders/ArticleLoader";
 import LogInForm from "./components/LogInForm/LogInForm";
-import { signOut } from "firebase/auth";
-import { useState } from "react";
-import { set } from "react-hook-form";
-// import { changePage } from "../../features/AdminPage";
-// import { useSelector, useDispatch } from "react-redux";
+import Overview from "./components/Dashboard/Overview/Overview";
+import Articles from "./components/Dashboard/Articles/Articles";
+import Commands from "./components/Dashboard/Commands/Commands";
+import Settings from "./components/Dashboard/Settings/Settings";
 
 const Admin = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  // const page = useSelector((state) => state.page.value);
-  // console.log(page);
-  // const signout = async () =>{
-  //   await signOut(auth);
-  // }
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log("logged In");
-      setLoggedIn(true);
-    } else {
-      console.log("Not logged In");
-      // return <LogInForm />;
-    }
-  });
+  const page = useSelector((state) => state.page.value);
+  const dispatch = useDispatch();
 
-  return (
-    <div>
-      {loggedIn ? (
-        <div>Logged In</div>
-      ) : (
-        <div>
-          <LogInForm />
-        </div>
-      )}
-    </div>
-  );
+  console.log(page);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(changePage("Overview"));
+      } else {
+        dispatch(changePage("LogIn"));
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const renderPage = (page) => {
+    switch (page) {
+      case "LogIn":
+        return <LogInForm />;
+      case "Overview":
+        return <Overview />;
+      case "Articles":
+        return <Articles />;
+      case "Commands":
+        return <Commands />;
+      case "Settings":
+        return <Settings />;
+      case "":
+        return <ArticleLoader />;
+    }
+  };
+
+  return <div>{renderPage(page)}</div>;
 };
 
 export default Admin;

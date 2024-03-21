@@ -16,9 +16,9 @@ const Navbar = () => {
         <img className="logo" src={logo} alt="Logo" />
         <h1>RsWorlds</h1>
       </div>
-      <nav>
+      <div>
         <Cart />
-      </nav>
+      </div>
     </header>
   );
 };

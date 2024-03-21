@@ -2,25 +2,60 @@
   display: flex;
   margin-right: 20px;
 
-  .cartIcon {
+  div {
+    display: flex;
+    .cartIcon {
+      margin: 5px;
+      width: 32px;
+      height: 32px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .cartItems {
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "BrandFont";
+    }
+  }
+}
+
+.hamburger {
+  display: none;
+}
+
+.close {
+  display: none;
+}
+
+@media (max-width: 400px) {
+}
+
+@media (min-width: 401px) and (max-width: 600px) {
+}
+
+@media (max-width: 900px) {
+  .activeHamburger {
+    display: block;
+    fill: whitesmoke;
     margin: 5px;
     width: 32px;
     height: 32px;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
-  .cartItems {
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    border-radius: 50%;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "BrandFont";
+  .activeClose {
+    display: block;
+    fill: whitesmoke;
+    margin: 5px;
+    width: 32px;
+    height: 32px;
   }
 }

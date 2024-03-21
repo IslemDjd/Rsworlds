@@ -4,9 +4,7 @@ const Settings = () => {
     
   return (
     <div className="settings">
-      <div className="leftSide">
         <SideBar />
-      </div>
       <div className="rightSide">
         <h1>Settings</h1>
 

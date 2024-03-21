@@ -17,7 +17,7 @@ const SideBar = () => {
     await signOut(auth);
   };
   return (
-    <div className="sideBar">
+    <div className="sideBar leftSide">
       <ul>
         <li
           onClick={() => {

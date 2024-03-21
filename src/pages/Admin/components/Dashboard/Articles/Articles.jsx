@@ -3,9 +3,7 @@ import "./articles.scss";
 const Articles = () => {
   return (
     <div className="adminArticles">
-      <div className="leftSide">
         <SideBar/>
-      </div>
       <div className="rightSide">
         <h1>Articles</h1>
 

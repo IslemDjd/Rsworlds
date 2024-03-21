@@ -4,9 +4,7 @@ import "./commands.scss";
 const Commands = () => {
   return (
     <div className="commands">
-      <div className="leftSide">
         <SideBar/>
-      </div>
       <div className="rightSide">
         <h1>Commands</h1>
 

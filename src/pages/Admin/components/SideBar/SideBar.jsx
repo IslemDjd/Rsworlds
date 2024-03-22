@@ -6,39 +6,109 @@ import { FaShoppingBag } from "react-icons/fa";
 import { GiLargeDress } from "react-icons/gi";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../../config/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changePage } from "../../../../features/AdminPage";
+import { addClass } from "../../../../features/ShowSideBar";
+import { useEffect } from "react";
 
 const SideBar = () => {
-  // const page = useSelector((state) => state.page.value);
   const dispatch = useDispatch();
+  const activePage = useSelector((state) => state.page.value);
+  const showSideBar = useSelector((state) => state.showSideBar.value);
 
   const signout = async () => {
     await signOut(auth);
+    if (window.innerWidth <= 900) {
+      hideSideBar();
+    }
   };
+
+  const hideSideBar = () => {
+    dispatch(
+      addClass({
+        hamburger: "activeHamburger",
+        close: "close",
+        sideBar: "sideBarHidden",
+      })
+    );
+  };
+
+  const handlePageChanges = (pageName) => {
+    dispatch(changePage(pageName));
+    if (window.innerWidth <= 900) {
+      hideSideBar();
+    }
+  };
+
+  useEffect(() => {
+    if (window.innerWidth <= 900) {
+      dispatch(
+        addClass({
+          hamburger: "activeHamburger",
+          close: "close",
+          sideBar: "sideBarHidden",
+        })
+      );
+    } else {
+      dispatch(
+        addClass({
+          hamburger: "activeHamburger",
+          close: "close",
+          sideBar: "sideBar leftSide",
+        })
+      );
+    }
+    const handleResize = () => {
+      if (window.innerWidth > 900) {
+        dispatch(
+          addClass({
+            hamburger: "activeHamburger",
+            close: "close",
+            sideBar: "sideBar leftSide",
+          })
+        );
+      } else {
+        dispatch(
+          addClass({
+            hamburger: "activeHamburger",
+            close: "close",
+            sideBar: "sideBarHidden",
+          })
+        );
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [dispatch]);
+
   return (
-    <div className="sideBar leftSide">
+    <div className={showSideBar.sideBar}>
       <ul>
         <li
-          onClick={() => {
-            dispatch(changePage("Overview"));
-          }}
+          className={activePage === "Overview" ? "active" : ""}
+          onClick={() => handlePageChanges("Overview")}
         >
           <GrOverview />
           &nbsp;Overview
         </li>
         <li
-          onClick={() => {
-            dispatch(changePage("Articles"));
-          }}
+          className={
+            activePage === "Articles" ||
+            activePage === "AddArticles" ||
+            activePage === "DeleteArticles" ||
+            activePage === "UpdateArticles"
+              ? "active"
+              : ""
+          }
+          onClick={() => handlePageChanges("Articles")}
         >
           <GiLargeDress />
           &nbsp;Articles
         </li>
         <li
-          onClick={() => {
-            dispatch(changePage("Commands"));
-          }}
+          className={activePage === "Commands" ? "active" : ""}
+          onClick={() => handlePageChanges("Commands")}
         >
           <FaShoppingBag />
           &nbsp;Commands
@@ -47,9 +117,8 @@ const SideBar = () => {
 
       <ul>
         <li
-          onClick={() => {
-            dispatch(changePage("Settings"));
-          }}
+          className={activePage === "Settings" ? "active" : ""}
+          onClick={() => handlePageChanges("Settings")}
         >
           <IoMdSettings />
           &nbsp;Settings

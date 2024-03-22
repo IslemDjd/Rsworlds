@@ -16,8 +16,9 @@ const Cart = () => {
   const toggleHamburger = () => {
     dispatch(
       addClass({
-        hamburger: "hamburger",
         close: "activeClose",
+        hamburger: "hamburger",
+        sideBar: "sideBar leftSide",
       })
     );
   };
@@ -26,6 +27,7 @@ const Cart = () => {
       addClass({
         hamburger: "activeHamburger",
         close: "close",
+        sideBar: "sideBarHidden",
       })
     );
   };
@@ -34,6 +36,9 @@ const Cart = () => {
     <div className="cart">
       {page == "Overview" ||
       page == "Articles" ||
+      page == "AddArticles" ||
+      page == "DeleteArticles" ||
+      page == "UpdateArticles" ||
       page == "Commands" ||
       page == "Settings" ? (
         <div>

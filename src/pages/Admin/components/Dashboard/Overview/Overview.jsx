@@ -4,9 +4,8 @@ import SideBar from "../../SideBar/SideBar";
 const Overview = () => {
   return (
     <div className="overview">
-      {/* <div className="leftSide"> */}
       <SideBar />
-      {/* </div> */}
+      
       <div className="rightSide">
         <h1>Overview</h1>
 

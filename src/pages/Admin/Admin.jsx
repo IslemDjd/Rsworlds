@@ -10,6 +10,9 @@ import Overview from "./components/Dashboard/Overview/Overview";
 import Articles from "./components/Dashboard/Articles/Articles";
 import Commands from "./components/Dashboard/Commands/Commands";
 import Settings from "./components/Dashboard/Settings/Settings";
+import AddArticles from "./components/Dashboard/Articles/AddArticles/AddArticles";
+import DeleteArticles from "./components/Dashboard/Articles/DeleteArticles/DeleteArticles";
+import UpdateArticles from "./components/Dashboard/Articles/UpdateArticles/UpdateArticles";
 
 const Admin = () => {
   const page = useSelector((state) => state.page.value);
@@ -40,6 +43,12 @@ const Admin = () => {
         return <Commands />;
       case "Settings":
         return <Settings />;
+      case "AddArticles":
+        return <AddArticles />;
+      case "DeleteArticles":
+        return <DeleteArticles />;
+      case "UpdateArticles":
+        return <UpdateArticles />;
       case "":
         return <ArticleLoader />;
     }

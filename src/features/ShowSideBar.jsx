@@ -5,7 +5,8 @@ export const showSideBarSlice = createSlice({
   initialState: {
     value: {
         hamburger: "activeHamburger",
-        close: "close"
+        close: "close",
+        sideBar: "sideBarHidden"
     },
   },
   reducers: {

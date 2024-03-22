@@ -13,6 +13,59 @@
   .rightSide {
     width: 100%;
     border: 0.1px solid white;
-    // background-color: red;
+
+    .pageTitle {
+      font-family: "mdBold";
+      margin: 3rem auto;
+      font-size: 2.5rem;
+    }
+
+    .articlesActions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 90%;
+      margin: 1rem auto;
+
+      .actionCard {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 50vw;
+        box-shadow: 0 0 5px rgba(117, 117, 117, 0.6);
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgb(241, 240, 240);
+        }
+
+        .icon {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+          font-family: "mdSemi";
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .adminArticles {
+    .rightSide {
+      .articlesActions {
+        flex-direction: column;
+
+        .actionCard {
+          width: 90%;
+          margin: 0 auto;
+        }
+      }
+    }
   }
 }

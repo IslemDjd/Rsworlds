@@ -5,7 +5,7 @@ const Overview = () => {
   return (
     <div className="overview">
       <SideBar />
-      
+
       <div className="rightSide">
         <h1>Overview</h1>
 

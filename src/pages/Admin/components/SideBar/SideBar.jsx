@@ -16,6 +16,8 @@ const SideBar = () => {
   const activePage = useSelector((state) => state.page.value);
   const showSideBar = useSelector((state) => state.showSideBar.value);
 
+  // console.log(activePage);
+
   const signout = async () => {
     await signOut(auth);
     if (window.innerWidth <= 900) {
@@ -77,6 +79,8 @@ const SideBar = () => {
         );
       }
     };
+
+    handleResize();
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

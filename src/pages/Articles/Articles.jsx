@@ -5,20 +5,30 @@ import { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import ArticleLoader from "../../loaders/ArticleLoader";
 
-
 const Article = () => {
   const [articles, setArticles] = useState([]);
 
   const articlesCollectionrRef = collection(db, "Articles");
 
+  console.log(articles);
+
   const getArticles = async () => {
     try {
       const data = await getDocs(articlesCollectionrRef);
-      const filteredArticles = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setArticles(filteredArticles);
+      const sortedArticles = data.docs
+        .map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+        .sort((a, b) => {
+          return new Date(b.dateAdded) - new Date(a.dateAdded);
+        });
+
+      setArticles(sortedArticles);
+      // const sortedArticles = filteredArticles.sort((a, b) => {
+      //   return new Date(b.dateAdded) - new Date(a.dateAdded); // Sort by date in descending order
+      // });
+      // setArticles(sortedArticles);
     } catch (err) {
       console.error(err);
     }
@@ -31,7 +41,7 @@ const Article = () => {
 
   const filterAndSortSizes = (sizes) => {
     const sizeOrder = ["S", "M", "L", "XL", "XXL"];
-    return sizeOrder.filter((size) => sizes[size] !== 0);
+    return sizeOrder.filter((size) => sizes[size] > 0);
   };
 
   if (!articles || articles.length === 0) {

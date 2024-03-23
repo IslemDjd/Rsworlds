@@ -14,12 +14,7 @@
     width: 100%;
     border: 0.1px solid white;
 
-    .pageTitle {
-      font-family: "mdBold";
-      margin: 3rem auto;
-      font-size: 2.5rem;
-    }
-
+    
     .articlesActions {
       display: flex;
       flex-direction: column;
@@ -53,6 +48,11 @@
       }
     }
   }
+}
+.pageTitle {
+  font-family: "mdBold";
+  margin: 2rem auto;
+  font-size: 2.5rem;
 }
 
 @media (max-width: 900px) {

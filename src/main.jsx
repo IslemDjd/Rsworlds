@@ -7,11 +7,13 @@ import { Provider } from "react-redux";
 import cartArticleReducer from "./features/CartArticle.jsx";
 import pageReducer from "./features/AdminPage.jsx";
 import showSideBarReducer from "./features/ShowSideBar.jsx";
+import previousPageReducer from "./features/PreviousPage.jsx";
 
 const store = configureStore({
   reducer: {
     cartArticle: cartArticleReducer,
     page: pageReducer,
+    previousPage: previousPageReducer,
     showSideBar: showSideBarReducer,
   },
 });

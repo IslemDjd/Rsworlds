@@ -7,7 +7,7 @@ const UpdateArticles = () => {
       <SideBar />
 
       <div className="rightSide">
-        <h1>Update Articles</h1>
+        <h1 className="pageTitle">Update Articles</h1>
 
         <div style={{ height: "400px" }}></div>
       </div>

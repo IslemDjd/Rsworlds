@@ -5,6 +5,12 @@
   flex-direction: column;
   justify-content: start;
 
+  .subList {
+    li {
+      margin: 1rem auto;
+    }
+  }
+
   ul {
     list-style: none;
     padding: 0 0 0 10%;
@@ -15,7 +21,7 @@
     }
 
     li {
-      margin: 1.5rem auto;
+      margin: 1.5rem auto 0 auto;
       font-family: "mdSemi";
       display: flex;
       align-items: center;
@@ -44,17 +50,43 @@
     animation-iteration-count: 1;
   }
 
-   @keyframes Drop {
-            0%   {top:-350px;}
-            10%   {top:-310px;}
-            20%   {top:-270px;}
-            30%   {top:-230px;}
-            40%   {top:-190px;}
-            50%   {top:-150px;}
-            60%   {top:-110px;}
-            70%   {top:-70px;}
-            80%   {top:-30px;}
-            90%   {top:10px;}
-            100%  {top:50px;}
-        }
+  @keyframes Drop {
+    0% {
+      top: -350px;
+    }
+    10% {
+      top: -310px;
+    }
+    20% {
+      top: -270px;
+    }
+    30% {
+      top: -230px;
+    }
+    40% {
+      top: -190px;
+    }
+    50% {
+      top: -150px;
+    }
+    60% {
+      top: -110px;
+    }
+    70% {
+      top: -70px;
+    }
+    80% {
+      top: -30px;
+    }
+    90% {
+      top: 10px;
+    }
+    100% {
+      top: 50px;
+    }
+  }
+}
+
+.leftSide {
+  z-index: 100;
 }

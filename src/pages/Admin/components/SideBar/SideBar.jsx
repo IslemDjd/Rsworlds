@@ -110,6 +110,26 @@ const SideBar = () => {
           <GiLargeDress />
           &nbsp;Articles
         </li>
+        <ul className="subList">
+          <li
+            className={activePage === "AddArticles" ? "active" : ""}
+            onClick={() => handlePageChanges("AddArticles")}
+          >
+            Add Articles
+          </li>
+          <li
+            className={activePage === "DeleteArticles" ? "active" : ""}
+            onClick={() => handlePageChanges("DeleteArticles")}
+          >
+            Delete Articles
+          </li>
+          <li
+            className={activePage === "UpdateArticles" ? "active" : ""}
+            onClick={() => handlePageChanges("UpdateArticles")}
+          >
+            Update Articles
+          </li>
+        </ul>
         <li
           className={activePage === "Commands" ? "active" : ""}
           onClick={() => handlePageChanges("Commands")}

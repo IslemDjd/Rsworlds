@@ -1,21 +1,31 @@
-import SideBar from "../../../SideBar/SideBar";
 import "./addArticles.scss";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { v4 } from "uuid";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { db, storage } from "../../../../../../config/firebase";
-import { v4 } from "uuid";
+import SideBar from "../../../SideBar/SideBar";
 import { addDoc, collection } from "firebase/firestore";
+import { db, storage } from "../../../../../../config/firebase";
+import { changePage } from "../../../../../../features/AdminPage";
+import PopUpSuccess from "../../../../../../components/popUp/PopUpSuccess";
+import PopUpWarning from "../../../../../../components/popUp/PopUpWarning";
 
 const AddArticles = () => {
+  const dispatch = useDispatch();
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
   const schema = yup.object().shape({
     file: yup.mixed().required("File is required"),
     name: yup.string().required("Enter The Article Name"),
     price: yup
       .string()
       .required("Enter The Article Price")
-      .matches(/^[0-9]+$/, "Enter A Valid Price"),
+      .matches(/^[1-9][0-9]+$/, "Enter A Valid Price"),
     S: yup.string().matches(/^[0-9]+$/, "Enter A Valid Quantity"),
     M: yup.string().matches(/^[0-9]+$/, "Enter A Valid Quantity"),
     L: yup.string().matches(/^[0-9]+$/, "Enter A Valid Quantity"),
@@ -33,29 +43,70 @@ const AddArticles = () => {
 
   const onSubmit = async (data, e) => {
     try {
-      const imageRef = ref(storage, `Articles/${data.file[0].name + v4()}`);
-      await uploadBytes(imageRef, data.file[0]);
-      alert("image Uploaded");
-      const url = await getDownloadURL(imageRef);
-      const currentDate = new Date().toISOString();
+      if (!isFormSubmitted) {
+        setIsFormSubmitted(true);
+        const hasNonZeroSize =
+          data.S == 0 &&
+          data.M == 0 &&
+          data.L == 0 &&
+          data.XL == 0 &&
+          data.XXL == 0;
 
-      await addDoc(articlesRef, {
-        imageUrl: url,
-        name: data.name,
-        price: data.price,
-        size: {
-          S: data.S,
-          M: data.M,
-          L: data.L,
-          XL: data.XL,
-          XXL: data.XXL,
-        },
-        dateAdded: currentDate,
-      });
+        const validFileTypes = [
+          "image/png",
+          "image/jpg",
+          "image/webp",
+          "image/jpeg",
+        ];
 
-      // console.log(data);
-      // console.log(url);
-      e.target.reset();
+        const fileType = data.file[0].type;
+
+        if (!validFileTypes.includes(fileType)) {
+          setError("File Type Is Not Supported");
+          setIsFormSubmitted(false);
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
+          return;
+        }
+
+        if (hasNonZeroSize) {
+          console.log(data);
+          setError("Enter A Quantity For At Least One Size");
+          setIsFormSubmitted(false);
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
+          return;
+        }
+        const imageRef = ref(storage, `Articles/${data.file[0].name + v4()}`);
+        await uploadBytes(imageRef, data.file[0]);
+        const url = await getDownloadURL(imageRef);
+        const currentDate = new Date().toISOString();
+
+        await addDoc(articlesRef, {
+          imageUrl: url,
+          name: data.name,
+          price: data.price,
+          size: {
+            S: data.S,
+            M: data.M,
+            L: data.L,
+            XL: data.XL,
+            XXL: data.XXL,
+          },
+          dateAdded: currentDate,
+        });
+
+        e.target.reset();
+        setSuccess("Article Added Successfully");
+        setTimeout(() => {
+          window.scroll(0, 0);
+          setSuccess(null);
+          dispatch(changePage("Articles"));
+        }, 3000);
+        return;
+      }
     } catch (error) {
       console.error(error);
     }
@@ -146,10 +197,14 @@ const AddArticles = () => {
             <p>{errors.XXL?.message}</p>
           </div>
 
-          <button type="submit">Add Article</button>
+          <button>Add Article</button>
         </form>
 
-        <div style={{ height: "400px" }}></div>
+        {/* <div style={{ height: "400px" }}></div> */}
+        {error && <PopUpWarning errorText={error} setError={setError} />}
+        {success && (
+          <PopUpSuccess successText={success} setSuccess={setSuccess} />
+        )}
       </div>
     </div>
   );

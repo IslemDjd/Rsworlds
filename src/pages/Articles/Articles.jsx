@@ -10,8 +10,6 @@ const Article = () => {
 
   const articlesCollectionrRef = collection(db, "Articles");
 
-  console.log(articles);
-
   const getArticles = async () => {
     try {
       const data = await getDocs(articlesCollectionrRef);
@@ -25,10 +23,6 @@ const Article = () => {
         });
 
       setArticles(sortedArticles);
-      // const sortedArticles = filteredArticles.sort((a, b) => {
-      //   return new Date(b.dateAdded) - new Date(a.dateAdded); // Sort by date in descending order
-      // });
-      // setArticles(sortedArticles);
     } catch (err) {
       console.error(err);
     }

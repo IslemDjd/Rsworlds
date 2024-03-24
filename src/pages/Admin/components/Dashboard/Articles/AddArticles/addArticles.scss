@@ -7,7 +7,6 @@
 
   .leftSide {
     min-width: 180px;
-    z-index: 100;
     border: 0.1px solid rgb(241, 241, 241);
   }
 
@@ -55,27 +54,27 @@
       p {
         color: red;
         font-family: "mdSemi";
-        margin: 0  auto;
+        margin: 0 auto;
       }
 
       .sizes {
-        margin: 1rem 0; 
+        margin: 1rem 0;
         display: flex;
         align-items: start;
         flex-direction: column;
-        div{
+        div {
           position: relative;
-          label{
+          label {
             position: absolute;
             margin: 0;
             top: 50%;
             left: 5%;
             transform: translate(-5%, -50%);
           }
-          input{
+          input {
             margin-left: 3rem;
           }
-        } 
+        }
       }
 
       input[type="file"] {
@@ -152,3 +151,5 @@
     }
   }
 }
+
+

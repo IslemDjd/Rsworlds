@@ -18,8 +18,6 @@ const Admin = () => {
   const page = useSelector((state) => state.page.value);
   const dispatch = useDispatch();
 
-  // console.log(page);
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {

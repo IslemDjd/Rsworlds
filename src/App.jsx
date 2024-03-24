@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-// import Home from "./pages/Home/Home";
 import Cart from "./pages/Cart/Cart";
 import Footer from "./components/footer/Footer";
 import Article from "./pages/Articles/Articles";
@@ -11,6 +10,8 @@ import ConfirmSucess from "./pages/Checkout/ConfirmSuccess/ConfirmSucess";
 import Admin from "./pages/Admin/Admin";
 
 function App() {
+  const path = window.location.pathname;
+  const lastPart = path.substring(path.lastIndexOf("/") + 1);
   // console.log(import.meta.env.VITE_API_KEY);
   // console.log(import.meta.env.VITE_MEASUREMENT_ID);
   return (
@@ -27,7 +28,7 @@ function App() {
           <Route path="confirmationSucces" element={<ConfirmSucess />} />
           <Route path="*" element={<Error />} />
         </Routes>
-        <Footer />
+        {lastPart !== "admin" && <Footer />}
       </Router>
     </>
   );

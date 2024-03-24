@@ -7,7 +7,11 @@ import { IoClose } from "react-icons/io5";
 import { addClass } from "../../features/ShowSideBar";
 
 const Cart = () => {
-  const page = useSelector((state) => state.page.value);
+  // const page = useSelector((state) => state.page.value);
+
+  const path = window.location.pathname;
+  const lastPart = path.substring(path.lastIndexOf("/") + 1);
+
   const showSideBar = useSelector((state) => state.showSideBar.value);
   const cartArticle = useSelector((state) => state.cartArticle.value);
   const navigate = useNavigate();
@@ -34,13 +38,7 @@ const Cart = () => {
 
   return (
     <div className="cart">
-      {page == "Overview" ||
-      page == "Articles" ||
-      page == "AddArticles" ||
-      page == "DeleteArticles" ||
-      page == "UpdateArticles" ||
-      page == "Commands" ||
-      page == "Settings" ? (
+      {lastPart == "admin" ? (
         <div>
           <GiHamburgerMenu
             className={showSideBar.hamburger}

@@ -13,5 +13,40 @@
   .rightSide {
     width: 100%;
     border: 0.1px solid white;
+
+    .frame {
+      min-height: auto;
+      grid-template-columns: repeat(3, 30%);
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .deleteArticles {
+    .rightSide {
+      .frame {
+        grid-template-columns: repeat(1, 90vw);
+      }
+    }
+  }
+}
+
+@media (min-width: 401px) and (max-width: 600px) {
+  .deleteArticles {
+    .rightSide {
+      .frame {
+        grid-template-columns: repeat(2, 46vw);
+      }
+    }
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .deleteArticles {
+    .rightSide {
+      .frame {
+        grid-template-columns: repeat(3, 30vw);
+      }
+    }
   }
 }

@@ -1,0 +1,195 @@
+.updateCard {
+  width: 70%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.5rem;
+  //   display: flex;
+  //   flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  // gap: 15px;
+  padding: 0.5rem;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(117, 117, 117, 0.6);
+  z-index: 101;
+
+  .cardTitle {
+    font-family: "mdBold";
+  }
+
+  .addArticleForm {
+    width: 90%;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+
+    .oldImage{
+        max-width: 100px;
+        margin:1rem auto 2rem auto;
+        border-radius: 0.5rem;
+    }
+
+    label {
+      font-family: "mdSemi";
+      text-align: start;
+      margin: 1rem 0 0 0;
+    }
+
+    input {
+      font-family: "mdSemi";
+      padding: 0.75em 1em;
+      margin: 0.5rem 0;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 0.3rem;
+      letter-spacing: 0.1ch;
+      caret-color: black;
+      color: black;
+    }
+
+    input:-webkit-autofill {
+      -webkit-text-fill-color: black !important;
+      background-color: white !important;
+      border: 1px solid black;
+      box-shadow: 0 0 0 50px white inset !important;
+      caret-color: black;
+    }
+
+    .buttons{
+        display: flex;
+        justify-content: space-between;
+        button{
+            width: 45%;
+        }
+    }
+
+    button {
+      margin: 2rem 0;
+    }
+
+    p {
+      color: red;
+      font-family: "mdSemi";
+      margin: 0 auto;
+    }
+
+    .sizes {
+      margin: 1rem 0;
+      display: flex;
+      align-items: start;
+      flex-direction: column;
+      div {
+        position: relative;
+        label {
+          position: absolute;
+          margin: 0;
+          top: 50%;
+          left: 5%;
+          transform: translate(-5%, -50%);
+        }
+        input {
+          margin-left: 3rem;
+        }
+      }
+    }
+
+    input[type="file"] {
+      outline: none;
+      padding: 4px;
+      margin: -4px;
+      font-family: "mdSemi";
+      border: 0;
+    }
+
+    input[type="file"]:focus-within::file-selector-button,
+    input[type="file"]:focus::file-selector-button {
+      outline: 2px solid #0964b0;
+      outline-offset: 2px;
+    }
+
+    input[type="file"]::before {
+      top: 16px;
+    }
+
+    input[type="file"]::after {
+      top: 14px;
+    }
+
+    input[type="file"] {
+      position: relative;
+    }
+
+    input[type="file"]::file-selector-button {
+      width: 136px;
+      color: transparent;
+    }
+
+    /* Faked label styles and icon */
+    input[type="file"]::before {
+      position: absolute;
+      pointer-events: none;
+      left: 40px;
+      color: #0964b0;
+      content: "Upload File";
+    }
+
+    input[type="file"]::after {
+      position: absolute;
+      pointer-events: none;
+      left: 16px;
+      height: 20px;
+      width: 20px;
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
+    }
+
+    input[type="file"]::file-selector-button {
+      border-radius: 4px;
+      padding: 0 16px;
+      height: 40px;
+      cursor: pointer;
+      background-color: white;
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+      margin-right: 16px;
+      transition: background-color 200ms;
+    }
+
+    /* file upload button hover state */
+    input[type="file"]::file-selector-button:hover {
+      background-color: #f3f4f6;
+    }
+
+    /* file upload button active state */
+    input[type="file"]::file-selector-button:active {
+      background-color: #e5e7eb;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .updateCard {
+    width: 80%;
+  }
+}
+// @media (max-width: 400px) {
+//   .updateCard{
+//     width: 70%;
+//   }
+// }
+
+// @media (min-width: 401px) and (max-width: 600px) {
+//   .updateCard{
+//     width: 70%;
+//   }
+// }
+
+// @media (min-width: 601px) and (max-width: 900px) {
+//   .updateCard{
+//     width: 70%;
+//   }
+// }

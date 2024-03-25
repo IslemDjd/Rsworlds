@@ -9,11 +9,11 @@ import PopUpConfirm from "../../../../../../components/popUp/PopUpConfirm";
 import PopUpSuccess from "../../../../../../components/popUp/PopUpSuccess";
 
 const DeleteArticles = () => {
-  const [articles, setArticles] = useState([]);
   const [success, setSuccess] = useState(null);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [deletedArticle, setDeletedArticle] = useState({});
-
+  
+  const [articles, setArticles] = useState([]);
   const articlesCollectionrRef = collection(db, "Articles");
 
   const getArticles = async () => {

@@ -53,7 +53,12 @@ const UpdateCard = (props) => {
 
       const articleRef = doc(db, "Articles", props.article.id);
       let imageUrl = props.article.imageUrl;
-      const currentDate = new Date().toISOString();
+
+      const currentDate = new Date();
+      const timezoneOffset = currentDate.getTimezoneOffset();
+      const adjustedOffsetInMs = Math.abs(timezoneOffset) * 60 * 1000;
+      const localDate = new Date(currentDate.getTime() + adjustedOffsetInMs);
+      const localDateString = localDate.toISOString();
 
       if (data.file[0]) {
         const fileType = data.file[0].type;
@@ -90,7 +95,7 @@ const UpdateCard = (props) => {
           XL: data.XL,
           XXL: data.XXL,
         },
-        dateAdded: currentDate,
+        dateAdded: localDateString,
       });
 
       props.getArticles();

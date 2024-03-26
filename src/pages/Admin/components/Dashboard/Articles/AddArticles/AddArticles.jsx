@@ -82,7 +82,12 @@ const AddArticles = () => {
         const imageRef = ref(storage, `Articles/${data.file[0].name + v4()}`);
         await uploadBytes(imageRef, data.file[0]);
         const url = await getDownloadURL(imageRef);
-        const currentDate = new Date().toISOString();
+        
+        const currentDate = new Date();
+        const timezoneOffset = currentDate.getTimezoneOffset();
+        const adjustedOffsetInMs = Math.abs(timezoneOffset) * 60 * 1000;
+        const localDate = new Date(currentDate.getTime() + adjustedOffsetInMs);
+        const localDateString = localDate.toISOString();
 
         await addDoc(articlesRef, {
           imageUrl: url,
@@ -95,7 +100,7 @@ const AddArticles = () => {
             XL: data.XL,
             XXL: data.XXL,
           },
-          dateAdded: currentDate,
+          dateAdded: localDateString,
         });
 
         e.target.reset();
@@ -200,7 +205,6 @@ const AddArticles = () => {
           <button>Add Article</button>
         </form>
 
-        {/* <div style={{ height: "400px" }}></div> */}
         {error && <PopUpWarning errorText={error} setError={setError} />}
         {success && (
           <PopUpSuccess successText={success} setSuccess={setSuccess} />

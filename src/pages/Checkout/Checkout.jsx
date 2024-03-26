@@ -46,10 +46,18 @@ const Checkout = () => {
 
   const commandsRef = collection(db, "Commands");
 
+  const currentDate = new Date();
+  const timezoneOffset = currentDate.getTimezoneOffset();
+  const adjustedOffsetInMs = Math.abs(timezoneOffset) * 60 * 1000;
+  const localDate = new Date(currentDate.getTime() + adjustedOffsetInMs);
+  const localDateString = localDate.toISOString();
+
   const onSubmit = async (data) => {
     const command = {
       user: data,
       articles: JSON.parse(localStorage.getItem("selectedArticles")),
+      commandDate: localDateString,
+      status: "Not Accepted"
     };
     await addDoc(commandsRef, command);
     navigate("/confirmationSucces");

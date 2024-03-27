@@ -13,17 +13,8 @@
   .rightSide {
     width: 100%;
     border: 0.1px solid white;
-
-    .backArrow{
-      position: absolute;
-      width: 2rem;
-      height: 2rem;
-      left: 0rem;
-      top: 0.5rem;
-    }
   }
 }
-
 
 @media (max-width: 900px) {
   // .overview{

@@ -57,7 +57,7 @@ const Checkout = () => {
       user: data,
       articles: JSON.parse(localStorage.getItem("selectedArticles")),
       commandDate: localDateString,
-      status: "Not Accepted"
+      status: "Not Confirmed"
     };
     await addDoc(commandsRef, command);
     navigate("/confirmationSucces");

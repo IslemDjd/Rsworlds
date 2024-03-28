@@ -1,7 +1,88 @@
 /* eslint-disable react/prop-types */
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import "./commandDetails.scss";
+import { FaTimes } from "react-icons/fa";
+import { db } from "../../../../../../config/firebase";
+import { useEffect, useState } from "react";
+import PopUpWarning from "../../../../../../components/popUp/PopUpWarning";
+import PopUpSuccess from "../../../../../../components/popUp/PopUpSuccess";
+import ConfirmCancel from "./ConfirmCancel";
 
 const CommandDetails = (props) => {
+  const [commandStatus, setCommandStatus] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [isCancelClicked, setIsCancelClicked] = useState(false);
+
+  const getCommandById = async () => {
+    const docRef = doc(db, "Commands", props.command.id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const commandData = { ...docSnap.data(), id: docSnap.id };
+      setCommandStatus(commandData.status);
+    } else {
+      console.log("Document not found");
+    }
+  };
+
+  const handleAccept = async () => {
+    const commandRef = doc(db, "Commands", props.command.id);
+    try {
+      await updateDoc(commandRef, {
+        status: "Pending",
+      });
+      props.getCommands();
+      getCommandById();
+
+      setSuccess("Command Accepted");
+      setTimeout(() => {
+        setSuccess(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error updating command status:", error);
+    }
+  };
+
+  const handleCancel = async () => {
+    const commandRef = doc(db, "Commands", props.command.id);
+    try {
+      await updateDoc(commandRef, {
+        status: "Canceled",
+      });
+      props.getCommands();
+      getCommandById();
+
+      setError("Command Canceled");
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error updating command status:", error);
+    }
+  };
+
+  const handleComplete = async () => {
+    const commandRef = doc(db, "Commands", props.command.id);
+    try {
+      await updateDoc(commandRef, {
+        status: "Completed",
+      });
+      props.getCommands();
+      getCommandById();
+
+      setSuccess("Command Completed");
+      setTimeout(() => {
+        setSuccess(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Error updating command status:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCommandById();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div>
       <div className="popUpOverlay"></div>
@@ -59,15 +140,57 @@ const CommandDetails = (props) => {
           ))}
         </div>
 
-        <button
-          type="button"
+        <div className="commandStatus">
+          <h1>Command Status</h1>
+          <span>{commandStatus}</span>
+
+          {commandStatus === "Not Confirmed" && (
+            <div className="commandActions">
+              <button onClick={handleAccept}>Accept</button>
+              <button
+                onClick={() => {
+                  setIsCancelClicked(true);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+
+          {commandStatus === "Pending" && (
+            <div className="commandActions">
+              <button onClick={handleComplete}>Complete</button>
+              <button
+                onClick={() => {
+                  setIsCancelClicked(true);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+        </div>
+
+        <FaTimes
+          className="closeCommand"
           onClick={() => {
             props.setIsCommandClicked(false);
           }}
-        >
-          Cancel
-        </button>
+        />
       </div>
+      {isCancelClicked && (
+        <ConfirmCancel
+          setIsCancelClicked={setIsCancelClicked}
+          getCommandById={getCommandById}
+          handleCancel={handleCancel}
+          setError={setError}
+        />
+      )}
+
+      {error && <PopUpWarning errorText={error} setError={setError} />}
+      {success && (
+        <PopUpSuccess successText={success} setSuccess={setSuccess} />
+      )}
     </div>
   );
 };

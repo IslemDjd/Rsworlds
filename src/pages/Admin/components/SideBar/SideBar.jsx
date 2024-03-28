@@ -152,6 +152,8 @@ const SideBar = () => {
           &nbsp;Log Out
         </li>
       </ul>
+
+      <div style={{ height: "300px" }}></div>
     </div>
   );
 };

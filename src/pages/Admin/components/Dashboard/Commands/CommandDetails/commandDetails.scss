@@ -9,7 +9,7 @@
   transform: translate(-50%);
   overflow: hidden;
   box-shadow: 0 0 20px rgba(117, 117, 117, 0.6);
-  z-index: 101;
+  z-index: 100;
 
   .clientInfo {
     text-align: start;
@@ -74,6 +74,42 @@
           }
         }
       }
+    }
+  }
+
+  .commandStatus {
+    margin: 1rem auto 7rem auto;
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 auto 0.5rem auto;
+    }
+
+    span {
+      font-family: "mdSemi";
+      font-size: 1.2rem;
+    }
+
+    .commandActions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 3rem auto 0rem auto;
+
+      button {
+        min-width: 8rem;
+      }
+    }
+  }
+
+  .closeCommand{
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 1rem;
+    right: 1rem;
+    &:hover{
+      cursor: pointer;
+      fill: var(--primary);
     }
   }
 }

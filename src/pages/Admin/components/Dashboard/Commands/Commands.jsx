@@ -41,6 +41,7 @@ const Commands = () => {
       return (
         command.status === "Not Confirmed" ||
         command.status === "Pending" ||
+        command.status === "Completed" ||
         command.status === "Canceled"
       );
     } else if (filter === "completed") {
@@ -161,10 +162,10 @@ const Commands = () => {
           <CommandDetails
             command={selectedCommand}
             setIsCommandClicked={setIsCommandClicked}
+            getCommands={getCommands}
           />
         )}
 
-        <div style={{ height: "400px" }}></div>
       </div>
     </div>
   );

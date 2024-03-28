@@ -7,7 +7,7 @@ import CommandDetails from "./CommandDetails/CommandDetails";
 
 const Commands = () => {
   const [commands, setCommands] = useState([]);
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState("notConfirmed");
   const [isCommandClicked, setIsCommandClicked] = useState(false);
   const [selectedCommand, setSelectedCommand] = useState({});
 
@@ -38,12 +38,7 @@ const Commands = () => {
 
   const filteredCommands = commands.filter((command) => {
     if (filter === "all") {
-      return (
-        command.status === "Not Confirmed" ||
-        command.status === "Pending" ||
-        command.status === "Completed" ||
-        command.status === "Canceled"
-      );
+      return true;
     } else if (filter === "completed") {
       return command.status === "Completed";
     } else if (filter === "notConfirmed") {
@@ -121,8 +116,8 @@ const Commands = () => {
               <th className="orderId">Order N&deg;</th>
               <th className="clienName">Client Name</th>
               <th className="wilaya">Wilaya</th>
-              <th className="orderDate">Date</th>
-              <th className="orderPrice">Price</th>
+              <th className="orderDate phoneView">Date</th>
+              <th className="orderPrice phoneView">Price</th>
               <th className="orderStatus">Status</th>
             </tr>
           </thead>
@@ -142,17 +137,19 @@ const Commands = () => {
                   {command.user.firstName} {command.user.lastName}
                 </td>
                 <td>{command.user.wilaya}</td>
-                <td>
+                <td className="phoneView">
                   {new Date(command.commandDate).toLocaleDateString("en-GB")}
                 </td>
-                <td>
+                <td className="phoneView">
                   {command.articles.reduce(
                     (acc, article) => acc + article.quantity * article.price,
                     0
                   )}{" "}
                   DA
                 </td>
-                <td>{command.status}</td>
+                <td>
+                  <div className={command.status}>{command.status}</div>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -165,7 +162,6 @@ const Commands = () => {
             getCommands={getCommands}
           />
         )}
-
       </div>
     </div>
   );

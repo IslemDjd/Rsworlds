@@ -1,70 +1,74 @@
+footer {
+  bottom: 0;
+  left: 0;
+  background-color: rgb(54, 54, 54);
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 
-
-footer{
-    bottom: 0;
-    left: 0;
-    background-color: rgb(54, 54, 54);
+  .brand {
     width: 100%;
-    height: 300px;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .socialMedia {
+    width: 50%;
+    font-family: "mdBold";
+  }
+  .socialIcons {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .social {
+    width: 40px;
+    height: 40px;
+  }
+
+  .facebook:hover {
+    fill: #1877f2;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .instagram:hover {
+    fill: #cc2b5e;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .tiktok:hover {
+    fill: #000000;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .contact {
+    display: flex;
+    color: white;
+    width: 80%;
+    font-family: "mdBold";
+    margin: 20px auto;
+    justify-content: center;
     align-items: center;
-
-    .brand{
-        width: 100%;
-        justify-content: center;
-        font-size: 16px;
+    h3 {
+      margin: 0 10px;
     }
 
-    .socialMedia{
-        width: 50%;
+    h4 {
+      letter-spacing: 1.5px;
+      font-size: 1.2rem;
+      margin: 0 10px;
     }
-    .socialIcons{
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-    }
-
-    h1{
-        margin: 0;
-    }
-
-    h3{
-        margin-top: 0;
-    }
-    
-
-    .social{
-        width: 40px;
-        height: 40px;
-    }
-
-    .facebook:hover{
-        fill: #1877F2;
-        transition: all 0.5s ease-in-out;
-    }
-
-    .instagram:hover{
-        fill: #cc2b5e;
-        transition: all 0.5s ease-in-out;
-    }
-
-    .tiktok:hover{
-        fill: #000000;
-        transition: all 0.5s ease-in-out;
-    }
-
-    .contact{
-        display: flex;
-        color: white;
-        width: 80%;
-        margin:20px auto;
-        justify-content: center;
-        align-items: center;
-
-        h4{
-            margin: 0 10px;
-        }
-    }
+  }
 }

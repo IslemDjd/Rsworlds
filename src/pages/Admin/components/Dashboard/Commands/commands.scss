@@ -41,7 +41,7 @@
     }
 
     .table tbody tr:hover {
-      background-color: #ececec;
+      background-color: #f7f7f7;
     }
 
     th.orderId {
@@ -66,6 +66,42 @@
 
     th.orderStatus {
       max-width: 10%;
+    }
+
+    .Pending {
+      width: 100%;
+      border-radius: 1rem;
+      text-align: center;
+      background-color: rgb(255, 244, 225);
+      color: orange;
+      padding: 2px;
+    }
+
+    .Completed {
+      width: 100%;
+      border-radius: 1rem;
+      text-align: center;
+      background-color: rgb(236, 255, 236);
+      color: green;
+      padding: 2px;
+    }
+
+    .Canceled {
+      width: 100%;
+      border-radius: 1rem;
+      text-align: center;
+      background-color: rgb(255, 233, 233);
+      color: red;
+      padding: 2px;
+    }
+
+    .Not {
+      width: 100%;
+      border-radius: 1rem;
+      text-align: center;
+      background-color: rgb(243, 243, 243);
+      color: black;
+      padding: 2px;
     }
 
     .radio-inputs {
@@ -107,6 +143,19 @@
     .radio-inputs .radio input:checked + .name {
       background-color: #fff;
       font-weight: 600;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .commands {
+    .rightSide {
+      .radio-inputs {
+        width: 90%;
+      }
+      .phoneView {
+        display: none;
+      }
     }
   }
 }

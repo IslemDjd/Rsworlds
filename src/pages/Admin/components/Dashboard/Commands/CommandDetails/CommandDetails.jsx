@@ -26,8 +26,8 @@ const CommandDetails = (props) => {
   };
 
   const handleAccept = async () => {
-    const commandRef = doc(db, "Commands", props.command.id);
     try {
+      const commandRef = doc(db, "Commands", props.command.id);
       await updateDoc(commandRef, {
         status: "Pending",
       });
@@ -44,8 +44,8 @@ const CommandDetails = (props) => {
   };
 
   const handleCancel = async () => {
-    const commandRef = doc(db, "Commands", props.command.id);
     try {
+      const commandRef = doc(db, "Commands", props.command.id);
       await updateDoc(commandRef, {
         status: "Canceled",
       });
@@ -62,8 +62,39 @@ const CommandDetails = (props) => {
   };
 
   const handleComplete = async () => {
-    const commandRef = doc(db, "Commands", props.command.id);
     try {
+      let canComplete = true;
+      for (const article of props.command.articles) {
+        const articleRef = doc(db, "Articles", article.id);
+        const docSnap = await getDoc(articleRef);
+        const articleData = { ...docSnap.data(), id: docSnap.id };
+        if (articleData.size[article.size] < article.quantity) {
+          canComplete = false;
+          break;
+        }
+      }
+
+      if (!canComplete) {
+        setError("Not Enough Stock For One Or More Articles.");
+        setTimeout(() => {
+          setError(null);
+        }, 5000);
+        return;
+      }
+
+      const updatePromises = props.command.articles.map(async (article) => {
+        const articleRef = doc(db, "Articles", article.id);
+        const docSnap = await getDoc(articleRef);
+        const articleData = { ...docSnap.data(), id: docSnap.id };
+        return updateDoc(articleRef, {
+          [`size.${article.size}`]:
+            articleData.size[article.size] - article.quantity,
+        });
+      });
+
+      await Promise.all(updatePromises);
+
+      const commandRef = doc(db, "Commands", props.command.id);
       await updateDoc(commandRef, {
         status: "Completed",
       });
@@ -107,7 +138,17 @@ const CommandDetails = (props) => {
           </div>
           <div>
             <span>Phone Number : &nbsp;</span>
-            <p>{props.command.user.phoneNumber}</p>
+            <p className="phoneNumber">{props.command.user.phoneNumber}</p>
+          </div>
+          <div>
+            <span>Total Price : &nbsp;</span>
+            <p>
+              {props.command.articles.reduce(
+                (acc, article) => acc + article.quantity * article.price,
+                0
+              )}{" "}
+              DA
+            </p>
           </div>
         </div>
 
@@ -196,3 +237,4 @@ const CommandDetails = (props) => {
 };
 
 export default CommandDetails;
+

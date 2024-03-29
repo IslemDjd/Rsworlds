@@ -5,6 +5,7 @@ import { MdRemoveShoppingCart } from "react-icons/md";
 import { TbShoppingCartCopy } from "react-icons/tb";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { TbShoppingCartQuestion } from "react-icons/tb";
+import { FaDollarSign } from "react-icons/fa";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../../../config/firebase";
@@ -93,6 +94,26 @@ const Overview = () => {
                     (command) => command.status === "Not Confirmed"
                   ).length
                 }
+              </h3>
+            </div>
+
+            <div className="Card">
+              <FaDollarSign className="icon" />
+              <h3>
+                Total Earnings <br />
+                &nbsp;{" "}
+                {commands
+                  .filter((command) => command.status === "Completed")
+                  .reduce(
+                    (acc, command) =>
+                      acc +
+                      command.articles.reduce(
+                        (acc, article) =>
+                          acc + article.quantity * article.price,
+                        0
+                      ),
+                    0
+                  )} DA
               </h3>
             </div>
           </div>

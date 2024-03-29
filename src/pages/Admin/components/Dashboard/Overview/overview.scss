@@ -13,13 +13,58 @@
   .rightSide {
     width: 100%;
     border: 0.1px solid white;
+
+    h1 {
+      font-family: "mdBold";
+    }
+
+    .overviewFrame {
+      width: 95%;
+      margin: 1rem auto;
+
+      .row {
+        display: flex;
+        gap: 1rem;
+        // justify-content: space-between;
+        margin-bottom: 1rem;
+
+        .Card {
+          width: 45%;
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          gap: 10px;
+          background-color: var(--light);
+          box-shadow: 0 0 2px rgba(117, 117, 117, 0.6);
+          .icon {
+            width: 2rem;
+            height: 2rem;
+          }
+
+          h3 {
+            font-family: "mdBold";
+            font-size: 1rem;
+            text-align: start;
+            margin: 0.5rem 0;
+          }
+        }
+      }
+    }
   }
 }
 
-@media (max-width: 900px) {
-  // .overview{
-  //   .leftSide{
-  //     display: none;
-  //   }
-  // }
+@media (max-width: 600px) {
+  .overview{
+    .rightSide{
+      .overviewFrame{
+        .row{
+          flex-direction: column;
+          .Card{
+            width: 80%;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+  }
 }

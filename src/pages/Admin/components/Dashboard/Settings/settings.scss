@@ -13,5 +13,60 @@
   .rightSide {
     width: 100%;
     border: 0.1px solid white;
+
+    h1 {
+      font-family: "mdBold";
+    }
+
+    .socialLinks {
+      width: 80%;
+      margin: 1rem auto;
+      display: flex;
+      flex-direction: column;
+
+      h3{
+        font-family: "mdBold";
+        text-align: start;
+        margin: 5rem 0 0 0;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+
+        button {
+          width: 8rem;
+          height: 2rem;
+          margin-left: 1rem;
+        }
+        
+        input {
+          width: 60%;
+          font-family: "mdSemi";
+          padding: 0.75em 1em;
+          margin: 0.5rem 0;
+          background-color: white;
+          border: 1px solid black;
+          border-radius: 0.3rem;
+          letter-spacing: 0.1ch;
+          caret-color: black;
+          color: black;
+        }
+
+        input:-webkit-autofill {
+          -webkit-text-fill-color: black !important;
+          background-color: white !important;
+          border: 1px solid black;
+          box-shadow: 0 0 0 50px white inset !important;
+          caret-color: black;
+        }
+      }
+
+      label {
+        font-family: "mdSemi";
+        text-align: start;
+        margin: 1rem 0 0 0;
+      }
+    }
   }
 }

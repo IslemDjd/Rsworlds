@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   justify-content: start;
-  // height: 100vh;
+  height: 100vh;
 
   .subList {
     li {
@@ -48,8 +48,8 @@
     transform: translate(-50%, 0);
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    animation: Drop 0.2s linear;
-    animation-iteration-count: 1;
+    // animation: Drop 0.2s linear;
+    // animation-iteration-count: 1;
   }
 
   @keyframes Drop {
@@ -87,6 +87,7 @@
       top: 50px;
     }
   }
+  
 }
 
 .leftSide {
